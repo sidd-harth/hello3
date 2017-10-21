@@ -22,6 +22,12 @@ node {
             sh 'echo "Tests passed"'
         }
     }*/
+	
+	/*
+	stage('Run Image') {
+		app = docker run -it -p 8080:8080
+	
+	}*/
 
     stage('Push image') {
         /* Finally, we'll push the image with two tags:
@@ -30,8 +36,8 @@ node {
          * Pushing multiple tags is cheap, as all the layers are reused. */
 		 
         docker.withRegistry('https://registry.hub.docker.com', 'docker-hub-credentials') {
-            app.push("${env.BUILD_NUMBER}")
-            app.push("latest")
+            app.push("jenkins${env.BUILD_NUMBER}")
+            /* app.push("latest") */
         }
 		
 		
