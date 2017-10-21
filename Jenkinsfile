@@ -11,7 +11,7 @@ node {
         /* This builds the actual image; synonymous to docker build on the command line 
 
         app = docker.build("sidd-harth/hello3/target/docker") */
-		app = docker.build("sidd-harth/hello3")
+		app = docker.build("siddharth67/hello")
 
     }
 
@@ -29,9 +29,11 @@ node {
          * Second, the 'latest' tag.
          * Pushing multiple tags is cheap, as all the layers are reused. */
 		 
-        docker.withRegistry('https://siddharth67', 'docker-hub-credentials') {
+        /*docker.withRegistry('https://siddharth67', 'docker-hub-credentials') {
             app.push("${env.BUILD_NUMBER}")
             app.push("latest")
-        }
+        }*/
+		
+		app = docker.build("siddharth67/hello").push
     }
 }
